@@ -2,6 +2,10 @@
 
 Create, tailor, and export job‑fit resumes with AI assistance. Attach your basic details, experience, projects, upload an existing resume (PDF/DOCX) and the job description, add custom goals/instructions (e.g., "pass screening", "focus on backend"), then generate a tailored resume with a live preview.
 
+## Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fneelo4%2FATS-Wizard)
+
 ## Highlights
 
 - Modern React (Next.js 14) + TypeScript + Tailwind CSS

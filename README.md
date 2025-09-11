@@ -1,10 +1,105 @@
 # JobFit Wizard
 
-Create, tailor, and export job‑fit resumes with AI assistance. Attach your basic details, experience, projects, upload an existing resume (PDF/DOCX) and the job description, add custom goals/instructions (e.g., "pass screening", "focus on backend"), then generate a tailored resume with a live preview.
+Craft job‑fit, ATS‑friendly resumes in minutes. Upload your existing resume and a job description, give a few goals, and let the wizard tailor a clean, export‑ready resume — with a live preview and an estimated ATS match.
 
-## Deploy
+<p align="center">
+  <a href="https://github.com/neelo4/ATS-Wizard/stargazers"><img src="https://img.shields.io/github/stars/neelo4/ATS-Wizard?style=social" alt="GitHub stars"></a>
+  <a href="https://github.com/neelo4/ATS-Wizard"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome"></a>
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fneelo4%2FATS-Wizard"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a>
+</p>
+
+> If this project helps you, please ⭐ the repo — it really motivates ongoing improvements and helps others discover it.
+
+## ✨ Why JobFit Wizard
+
+- 🎯 Tailored: AI‑assisted summary, skills and bullets aligned to the job description
+- 🧠 Smart: Heuristic ATS keyword match indicator and keyword visibility
+- 📄 Beautiful: 3 modern templates (Modern, Classic, Vibrant) and print‑perfect PDF export
+- 📦 Practical: Works fully client‑side for resume/JD parsing — no keys required
+- ⚡ Fast: Next.js 14 + TypeScript + Tailwind + Zustand
+- 🧭 Friendly: First‑time guided tour, quick start actions, and “Download Resume” flow
+
+## 🚀 Live Demo / Deploy
+
+- One‑click deploy to Vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fneelo4%2FATS-Wizard)
+
+## 📸 Preview
+
+> Add a short screen capture (GIF) for maximum impact. Suggested path: `docs/demo.gif`.
+
+```
+docs/
+  demo.gif   # drag a 5–8s demo here (UI → Upload → Generate → Download)
+```
+
+## 🧩 Features
+
+- Upload existing resume (PDF/DOCX/TXT) and job description
+- Client‑side parsing for privacy (pdfjs‑dist, mammoth)
+- Goals/keywords/constraints to steer generation
+- Live preview with template switching
+- ATS badge on preview; hidden in downloaded PDF
+- Guided onboarding tour (replay anytime with “Guide”)
+- Local sign‑in (name + email) that seeds a polished demo on first login
+
+## 🛠️ Tech Stack
+
+- Framework: Next.js 14 (App Router)
+- Language: TypeScript
+- UI: Tailwind CSS
+- State: Zustand
+- Parsing: pdfjs‑dist (PDF), mammoth (DOCX)
+
+## 🧪 Quick Start (Local)
+
+```bash
+git clone https://github.com/neelo4/ATS-Wizard.git
+cd ATS-Wizard
+npm install
+npm run dev
+# open http://localhost:3000
+```
+
+## 🗂️ Project Structure
+
+- `app/` — pages (App Router) and API routes
+- `components/` — forms, preview, tour, and UI pieces
+- `lib/` — types, store, parsers, templates, AI stub
+
+## 🧙 Templates
+
+- Modern — Profile → Current Role → Experience → Projects → Skills
+- Classic — Minimalist, typographic CV style
+- Vibrant — Bold header, chips and pills, two‑column content
+
+## 🧭 Roadmap
+
+- [ ] Accent color picker and compact template
+- [ ] “Generate Highlights” for Projects based on tech and goals
+- [ ] Real LLM integration option (OpenAI/Anthropic/Azure) behind an env flag
+- [ ] US Letter/A4 export toggle with margins preview
+- [ ] Import from LinkedIn/GitHub for Projects
+
+## 🤝 Contributing
+
+Issues and PRs are welcome! Good places to start:
+
+- “good first issue” labels
+- Template polish, accessibility passes, and micro‑copy improvements
+
+## 📣 Spread the word
+
+If you find this useful:
+
+- ⭐ Star the repo
+- Share on LinkedIn/Twitter with a short demo clip
+- Open issues for feature ideas — feedback shapes the roadmap
+
+---
+
+SEO keywords: resume builder, resume generator, ATS resume, job description parser, AI resume, Next.js, TypeScript, Tailwind, pdfjs, mammoth, job search tools, portfolio project, open-source.
 
 ## Highlights
 

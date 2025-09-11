@@ -57,43 +57,7 @@ export async function generateResumeDraft(data: ResumeData): Promise<GeneratedRe
     highlights: p.highlights.map(enrich),
   }))
 
-  // Synthesize minimal content if user provided none.
-  if (!experience.length) {
-    const top = matchedKeywords.slice(0, 4)
-    experience = [
-      {
-        id: nanoid(),
-        role: data.basics.headline || 'Software Engineer',
-        company: 'Independent / Freelance',
-        startDate: new Date().getFullYear().toString(),
-        achievements: [
-          `Built and shipped features using ${top.join(', ') || 'modern web technologies'}.`,
-          'Collaborated with stakeholders to deliver user-focused outcomes.',
-        ],
-        technologies: top,
-      },
-    ]
-  }
-
-  if (!projects.length) {
-    const top = matchedKeywords.slice(0, 5)
-    projects = [
-      {
-        id: nanoid(),
-        name: 'Portfolio Project',
-        url: '',
-        summary:
-          top.length
-            ? `End-to-end application highlighting ${top.join(', ')} with emphasis on performance and DX.`
-            : 'End-to-end application demonstrating core full‑stack skills and clean architecture.',
-        highlights: [
-          'Designed clean, modular components and reusable hooks.',
-          'Implemented testing and CI for reliable delivery.',
-        ],
-        technologies: top,
-      },
-    ]
-  }
+  // Do not auto-synthesize sections; only use user/parsed content
 
   return {
     sections: { summary, skills, experience, projects },

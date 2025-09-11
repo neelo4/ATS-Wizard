@@ -135,7 +135,6 @@ function Input({ label, value, onChange, type = 'text', required = false }: { la
 
 function SignInModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { signIn } = useAuth()
-  const seedExample = useResumeStore((s) => s.seedExample)
   const setBasics = useResumeStore((s) => s.setBasics)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -150,7 +149,7 @@ function SignInModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           signIn({ id, name: name.trim() || 'User', email: id })
           try {
             const existing = loadResume(id)
-            if (!existing) { seedExample(); setBasics({ fullName: name, email }) }
+            if (!existing) { setBasics({ fullName: name, email }) }
           } catch {}
           onClose()
         }}

@@ -43,7 +43,7 @@ export default function AuthGate() {
             template: existing.template,
           })
         } else {
-          seedExample()
+          // No auto demo content; only set basic identity
           setBasics({ fullName: name, email })
         }
       }}

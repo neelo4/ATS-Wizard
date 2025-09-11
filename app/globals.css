@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 239 246 255; /* brand-50 */
+  --foreground: 17 24 39;    /* gray-900 */
+}
+
+.dark {
+  --background: 17 24 39; /* gray-900 */
+  --foreground: 229 231 235; /* gray-200 */
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  color: rgb(var(--foreground));
+  background-color: rgb(var(--background));
+  background-image: linear-gradient(180deg, rgba(239,246,255,1), rgba(248,250,252,1));
+}
+.dark body {
+  background-color: rgb(var(--background));
+  background-image: none;
+}
+
+.container {
+  @apply mx-auto max-w-7xl px-4;
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center gap-2 rounded-md border border-gray-200 bg-brand-50 px-3 py-2 text-sm font-medium text-gray-800 shadow-sm transition-all duration-150 ease-out active:scale-[.99] hover:bg-brand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700; }
+  .btn-primary { @apply border-brand-600 bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-400; }
+  .btn-ghost { @apply border-transparent bg-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800; }
+  .btn-outline { @apply border-brand-200 bg-white text-brand-800 hover:bg-brand-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700; }
+
+  .input { @apply w-full rounded-md border border-brand-200 bg-brand-50 px-3 py-2 text-sm text-gray-900 shadow-sm transition-colors duration-150 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100; }
+
+  .card { @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm backdrop-blur transition-colors duration-150 dark:border-gray-800 dark:bg-gray-900/80; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-200; }
+
+  .segmented { @apply inline-flex items-center gap-1 rounded-lg border border-gray-300 bg-gray-100 p-1 shadow-sm transition-colors duration-150 dark:border-gray-700 dark:bg-gray-800; }
+  .segmented > button { @apply rounded-md px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700 transition-colors duration-150; }
+  .segmented > button[data-active="true"] { @apply border border-brand-300 bg-brand-100 text-brand-800 shadow-inner dark:border-brand-700 dark:bg-brand-900/50 dark:text-brand-200; }
+
+  /* Tactile tab-like buttons for step nav */
+  .btn-tab { @apply inline-flex items-center gap-2 rounded-md border border-gray-300 bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-800 shadow-[0_2px_0_rgba(0,0,0,0.15)] transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-[1px] active:shadow-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200; }
+  .btn-tab[data-active="true"] { @apply border-brand-400 bg-brand-100 text-brand-800 shadow dark:bg-brand-900/50 dark:text-brand-200; }
+
+  /* Step buttons without fixed colors; we color them per-step */
+  .btn-step { @apply inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium shadow-[0_2px_0_rgba(0,0,0,0.15)] transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-[1px] active:shadow-none border; }
+}
+
+/* Print only the resume */
+@media print {
+  body * { visibility: hidden !important; }
+  #resume-print, #resume-print * { visibility: visible !important; }
+  #resume-print { position: absolute; left: 0; top: 0; width: 100%; }
+  /* Improve fidelity when printing */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+/* One-shot marquee that slides in, bumps, and settles */
+@keyframes marquee-bang {
+  0%   { transform: translateX(100%); }
+  80%  { transform: translateX(0); }
+  88%  { transform: translateX(-6px); }
+  96%  { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+.marquee-bang {
+  white-space: nowrap;
+  animation: marquee-bang 1800ms cubic-bezier(.22,.61,.36,1) 200ms both;
+}

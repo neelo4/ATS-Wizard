@@ -18,7 +18,7 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
   const current = pickCurrent(generated.sections.experience)
   const rest = generated.sections.experience.filter((e) => e.id !== current?.id)
   return (
-    <div className="relative rounded-lg border bg-white p-6 text-gray-900 shadow">
+    <div className="relative break-words rounded-lg border bg-white p-6 text-gray-900 shadow">
       {view === 'screen' && (
         <ATSBadge score={generated.atsScore ?? 0} />
       )}
@@ -120,7 +120,7 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
 
 function ClassicTemplate({ data, generated }: { data: ResumeData; generated: GeneratedResume }) {
   return (
-    <div className="bg-white p-6 text-gray-900">
+    <div className="break-words bg-white p-6 text-gray-900">
       <h1 className="text-2xl font-extrabold tracking-tight">{data.basics.fullName || 'Your Name'}</h1>
       <Contact data={data} />
 
@@ -190,7 +190,7 @@ function ATSBadge({ score }: { score: number }) {
 
 function VibrantTemplate({ data, generated }: { data: ResumeData; generated: GeneratedResume }) {
   return (
-    <div className="overflow-hidden rounded-lg border bg-white text-gray-900 shadow">
+    <div className="overflow-hidden break-words rounded-lg border bg-white text-gray-900 shadow">
       <div className="bg-brand-600 px-6 py-5 text-white">
         <h1 className="text-3xl font-extrabold tracking-tight">{data.basics.fullName || 'Your Name'}</h1>
         <p className="text-sm opacity-90">{data.basics.headline || 'Title / Role'}</p>

@@ -29,7 +29,7 @@ export default function HomePage() {
           <h1 className="text-2xl font-bold">JobFit Wizard</h1>
           <Marquee text="Attach your details, upload JD/resume, and generate a tailored resume." />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar max-w-full">
           <TemplatePicker />
           <ThemeToggle />
           <GuideButton />

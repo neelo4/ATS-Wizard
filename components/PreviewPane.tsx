@@ -17,6 +17,7 @@ export default function PreviewPane() {
     attachments: s.attachments,
     instructions: s.instructions,
     template: s.template,
+    style: s.style,
   }))
   const [gen, setGen] = useState<GeneratedResume | null>(null)
   const [loading, setLoading] = useState(false)

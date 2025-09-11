@@ -25,7 +25,7 @@ export async function generateResumeDraft(data: ResumeData): Promise<GeneratedRe
   // Light touch enrichment of bullet points using JD cues.
   const cue = new Set(jdTokens)
   const enrich = (text: string) =>
-    text.replace(/\b(optimized|reduced|improved|increased)\b/gi, (m) => m.toUpperCase())
+    text.replace(/\b(optimized|reduced|improved|increased)\b/gi, (m: string) => m.toUpperCase())
 
   // Prefer parsed experience/projects from existing resume when available
   let parsedExp: any[] = []
@@ -41,11 +41,11 @@ export async function generateResumeDraft(data: ResumeData): Promise<GeneratedRe
   let experience = (data.experience.length ? data.experience : parsedExp).map((e) => ({
     ...e,
     achievements: e.achievements
-      .map((a) => (a.trim().length ? a : ''))
+      .map((a: string) => (a.trim().length ? a : ''))
       .filter(Boolean)
-      .map((a) =>
+      .map((a: string) =>
         a +
-        (Array.from(cue).some((k) => a.toLowerCase().includes(k))
+        (Array.from(cue as Set<string>).some((k: string) => a.toLowerCase().includes(k))
           ? ' — aligned with role requirements'
           : '')
       )

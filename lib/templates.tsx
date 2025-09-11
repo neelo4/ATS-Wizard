@@ -42,7 +42,7 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
               <div className="text-gray-500">{current.startDate}{current.endDate ? ` – ${current.endDate}` : current.current ? ' – Present' : ''}</div>
             </div>
             <ul className="mt-2 list-disc pl-5 text-sm">
-              {current.achievements.slice(0, 4).map((a, i) => (
+              {current.achievements.slice(0, 4).map((a: string, i: number) => (
                 <li key={i}>{a}</li>
               ))}
             </ul>
@@ -61,7 +61,7 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
                   <div className="text-gray-500">{e.startDate}{e.endDate ? ` – ${e.endDate}` : e.current ? ' – Present' : ''}</div>
                 </div>
                 <ul className="mt-2 list-disc pl-5 text-sm">
-                  {e.achievements.map((a, i) => (
+                  {e.achievements.map((a: string, i: number) => (
                     <li key={i}>{a}</li>
                   ))}
                 </ul>
@@ -85,7 +85,7 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
                 </div>
                 <p className="mt-1 text-sm text-gray-700">{p.summary}</p>
                 <ul className="mt-2 list-disc pl-5 text-sm">
-                  {p.highlights.map((h, i) => (
+                  {p.highlights.map((h: string, i: number) => (
                     <li key={i}>{h}</li>
                   ))}
                 </ul>
@@ -97,13 +97,13 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
 
       <section className="mt-4">
         <SectionTitle>Skills</SectionTitle>
-        <div className="mt-1 flex flex-wrap gap-2">
-          {generated.sections.skills.map((s, i) => (
-            <span key={i} className="rounded bg-gray-100 px-2 py-1 text-xs">
-              {s}
-            </span>
-          ))}
-        </div>
+          <div className="mt-1 flex flex-wrap gap-2">
+            {generated.sections.skills.map((s: string, i: number) => (
+              <span key={i} className="rounded bg-gray-100 px-2 py-1 text-xs">
+                {s}
+              </span>
+            ))}
+          </div>
       </section>
 
       {view === 'screen' && (

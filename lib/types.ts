@@ -53,6 +53,7 @@ export interface ResumeData {
   attachments: Attachments
   instructions: Instructions
   template: ResumeTemplateKey
+  style: ResumeStyle
 }
 
 export type ResumeTemplateKey = 'modern' | 'classic' | 'vibrant'
@@ -66,4 +67,9 @@ export interface GeneratedResume {
   }
   atsScore?: number
   matchedKeywords?: string[]
+}
+
+export type ResumeStyle = {
+  font: 'sans' | 'serif' | 'mono'
+  accent: string // hex color like #2563eb
 }

@@ -4,13 +4,19 @@ import type { GeneratedResume, ResumeTemplateKey, ResumeData } from './types'
 export type ResumeView = 'screen' | 'print'
 
 export function ResumeDocument({ data, generated, view = 'screen' }: { data: ResumeData; generated: GeneratedResume; view?: ResumeView }) {
+  const fontClass = data.style?.font === 'serif' ? 'font-serif' : data.style?.font === 'mono' ? 'font-mono' : 'font-sans'
+  const accent = data.style?.accent || '#2563eb'
   const Template =
     data.template === 'classic' ? ClassicTemplate : data.template === 'vibrant' ? VibrantTemplate : ModernTemplate
-  return <Template data={data} generated={generated} view={view} />
+  return (
+    <div className={fontClass} style={{ ['--accent' as any]: accent } as React.CSSProperties}>
+      <Template data={data} generated={generated} view={view} />
+    </div>
+  )
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-sm font-semibold tracking-wider text-gray-700 uppercase">{children}</h3>
+  return <h3 className="text-sm font-semibold tracking-wider text-gray-700 uppercase" style={{ color: 'var(--accent)' }}>{children}</h3>
 }
 
 function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData; generated: GeneratedResume; view?: ResumeView }) {
@@ -23,8 +29,8 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
         <ATSBadge score={generated.atsScore ?? 0} />
       )}
       <header className="border-b pb-4">
-        <h1 className="text-2xl font-bold">{data.basics.fullName || 'Your Name'}</h1>
-        <p className="text-sm text-gray-600">{data.basics.headline || 'Title / Role'}</p>
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>{data.basics.fullName || 'Your Name'}</h1>
+        <p className="text-sm text-gray-700">{data.basics.headline || 'Title / Role'}</p>
         <Contact data={data} colorful />
       </header>
 
@@ -99,11 +105,11 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
         <SectionTitle>Skills</SectionTitle>
           <div className="mt-1 flex flex-wrap gap-2">
             {generated.sections.skills.map((s: string, i: number) => (
-              <span key={i} className="rounded bg-gray-100 px-2 py-1 text-xs">
-                {s}
-              </span>
-            ))}
-          </div>
+            <span key={i} className="rounded px-2 py-1 text-xs" style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 15%, white)' }}>
+              {s}
+            </span>
+          ))}
+        </div>
       </section>
 
       {view === 'screen' && (
@@ -121,7 +127,7 @@ function ModernTemplate({ data, generated, view = 'screen' }: { data: ResumeData
 function ClassicTemplate({ data, generated }: { data: ResumeData; generated: GeneratedResume }) {
   return (
     <div className="break-words bg-white p-6 text-gray-900">
-      <h1 className="text-2xl font-extrabold tracking-tight">{data.basics.fullName || 'Your Name'}</h1>
+      <h1 className="text-2xl font-extrabold tracking-tight" style={{ color: 'var(--accent)' }}>{data.basics.fullName || 'Your Name'}</h1>
       <Contact data={data} />
 
       <hr className="my-3" />
@@ -191,12 +197,13 @@ function ATSBadge({ score }: { score: number }) {
 function VibrantTemplate({ data, generated }: { data: ResumeData; generated: GeneratedResume }) {
   return (
     <div className="overflow-hidden break-words rounded-lg border bg-white text-gray-900 shadow">
-      <div className="bg-brand-600 px-6 py-5 text-white">
-        <h1 className="text-3xl font-extrabold tracking-tight">{data.basics.fullName || 'Your Name'}</h1>
-        <p className="text-sm opacity-90">{data.basics.headline || 'Title / Role'}</p>
-        <div className="mt-2 text-xs opacity-95">
-          <Contact data={data} invert />
+      <div className="px-6 py-5">
+        <h1 className="text-3xl font-extrabold tracking-tight" style={{ color: 'var(--accent)' }}>{data.basics.fullName || 'Your Name'}</h1>
+        <p className="text-sm text-gray-700">{data.basics.headline || 'Title / Role'}</p>
+        <div className="mt-2 text-xs">
+          <Contact data={data} colorful />
         </div>
+        <div className="mt-3 h-px w-full" style={{ backgroundColor: 'var(--accent)' }} />
       </div>
       <div className="grid gap-6 p-6 md:grid-cols-2">
         <section>
@@ -205,9 +212,7 @@ function VibrantTemplate({ data, generated }: { data: ResumeData; generated: Gen
           <SectionTitle>Skills</SectionTitle>
           <div className="mt-1 flex flex-wrap gap-2">
             {generated.sections.skills.map((s, i) => (
-              <span key={i} className="rounded-full bg-brand-50 px-2 py-1 text-xs text-brand-800">
-                {s}
-              </span>
+              <span key={i} className="rounded-full px-2 py-1 text-xs" style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 15%, white)', color: 'var(--accent)' }}>{s}</span>
             ))}
           </div>
         </section>

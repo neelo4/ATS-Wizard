@@ -15,6 +15,7 @@ import AuthGate from '@/components/AuthGate'
 import TourController from '@/components/TourController'
 import GuideButton from '@/components/GuideButton'
 import { useResumeStore } from '@/lib/store'
+import StylePicker from '@/components/StylePicker'
 
 export default function HomePage() {
   const [step, setStep] = useState<StepKey>('details')
@@ -31,6 +32,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar max-w-full">
           <TemplatePicker />
+          <StylePicker />
           <ThemeToggle />
           <GuideButton />
           <AuthButton />

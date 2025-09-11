@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { nanoid } from './util'
-import type { ResumeData, ExperienceItem, ProjectItem, ResumeTemplateKey, BasicDetails, Instructions, Attachments } from './types'
+import type { ResumeData, ExperienceItem, ProjectItem, ResumeTemplateKey, BasicDetails, Instructions, Attachments, ResumeStyle } from './types'
 
 type State = {
   basics: BasicDetails
@@ -9,6 +9,7 @@ type State = {
   attachments: Attachments
   instructions: Instructions
   template: ResumeTemplateKey
+  style: ResumeStyle
 }
 
 type Actions = {
@@ -22,6 +23,7 @@ type Actions = {
   setAttachments: (v: Partial<Attachments>) => void
   setInstructions: (v: Partial<Instructions>) => void
   setTemplate: (v: ResumeTemplateKey) => void
+  setStyle: (v: Partial<ResumeStyle>) => void
   seedExample: () => void
   mergeParsed: (exp: ExperienceItem[], proj: ProjectItem[]) => void
   reset: () => void
@@ -34,6 +36,7 @@ const initialState: State = {
   attachments: {},
   instructions: { goals: [], keywords: [], constraints: [] },
   template: 'modern',
+  style: { font: 'sans', accent: '#2563eb' },
 }
 
 export const useResumeStore = create<State & Actions>((set) => ({
@@ -66,6 +69,7 @@ export const useResumeStore = create<State & Actions>((set) => ({
   setAttachments: (v) => set((s) => ({ attachments: { ...s.attachments, ...v } })),
   setInstructions: (v) => set((s) => ({ instructions: { ...s.instructions, ...v } })),
   setTemplate: (v) => set(() => ({ template: v })),
+  setStyle: (v) => set((s) => ({ style: { ...s.style, ...v } })),
   seedExample: () => set((s) => ({
     basics: {
       ...s.basics,
@@ -142,5 +146,6 @@ export const snapshot = (): ResumeData => {
     attachments: s.attachments,
     instructions: s.instructions,
     template: s.template,
+    style: s.style,
   }
 }

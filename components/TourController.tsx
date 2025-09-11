@@ -26,7 +26,8 @@ export default function TourController() {
   const key = `tour-seen:${user.id}`
   const steps = [
     { id: 'steps', selector: '#tour-steps', title: 'Navigate steps', body: 'Move through Basics, Experience, Projects, Uploads, Instructions, and Preview.' },
-    { id: 'template', selector: '#tour-template', title: 'Choose a format', body: 'Pick Modern, Classic, or Vibrant. These change the layout and style used for preview and export.' },
+    { id: 'template', selector: '#tour-template', title: 'Choose a format', body: 'Pick Modern, Classic, or Vibrant. These change the layout and structure.' },
+    { id: 'style', selector: '#tour-style', title: 'Style it', body: 'Choose font and accent color for the resume. Vibrant no longer forces a blue header — you decide the look.' },
     { id: 'theme', selector: '#tour-theme', title: 'Light or Dark', body: 'Toggle the app theme. The resume itself stays print‑friendly regardless of theme.' },
     { id: 'name', selector: '#tour-name', title: 'Start with your name', body: 'Enter your full name and email. You can also click “Ask Me Basics”.' },
     { id: 'upload', selector: '#tour-upload-resume', title: 'Attach your resume/JD', body: 'Upload your existing resume and the job description. We parse them to tailor your result.' },

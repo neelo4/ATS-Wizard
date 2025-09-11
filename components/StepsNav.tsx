@@ -23,7 +23,7 @@ export function StepsNav({ step, onChange }: { step: StepKey; onChange: (s: Step
   }
 
   return (
-    <nav id="tour-steps" className="flex flex-wrap gap-2">
+    <nav id="tour-steps" className="no-scrollbar -mx-2 flex flex-nowrap gap-2 overflow-x-auto px-2">
       {steps.map((s) => {
         const Icon = s.icon as any
         const active = s.key === step
@@ -33,7 +33,7 @@ export function StepsNav({ step, onChange }: { step: StepKey; onChange: (s: Step
             key={s.key}
             data-active={active}
             onClick={() => onChange(s.key as StepKey)}
-            className={`btn-step ${active ? colors.active : colors.base} ${colors.dark}`}
+            className={`btn-step shrink-0 ${active ? colors.active : colors.base} ${colors.dark}`}
           >
             <Icon size={14} />
             {s.label}

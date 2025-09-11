@@ -38,10 +38,10 @@ body {
 
   .input { @apply w-full rounded-md border border-brand-200 bg-brand-50 px-3 py-2 text-sm text-gray-900 shadow-sm transition-colors duration-150 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100; }
 
-  .card { @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm backdrop-blur transition-colors duration-150 dark:border-gray-800 dark:bg-gray-900/80; }
+  .card { @apply rounded-xl border border-gray-200 bg-white p-3 sm:p-4 shadow-sm backdrop-blur transition-colors duration-150 dark:border-gray-800 dark:bg-gray-900/80; }
   .chip { @apply inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-200; }
 
-  .segmented { @apply inline-flex items-center gap-1 rounded-lg border border-gray-300 bg-gray-100 p-1 shadow-sm transition-colors duration-150 dark:border-gray-700 dark:bg-gray-800; }
+  .segmented { @apply inline-flex flex-wrap items-center gap-1 rounded-lg border border-gray-300 bg-gray-100 p-1 shadow-sm transition-colors duration-150 dark:border-gray-700 dark:bg-gray-800; }
   .segmented > button { @apply rounded-md px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700 transition-colors duration-150; }
   .segmented > button[data-active="true"] { @apply border border-brand-300 bg-brand-100 text-brand-800 shadow-inner dark:border-brand-700 dark:bg-brand-900/50 dark:text-brand-200; }
 

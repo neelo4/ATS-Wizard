@@ -107,7 +107,7 @@ export const useResumeStore = create<State & Actions>((set) => ({
     projects: s.projects.length ? s.projects : [
       {
         id: nanoid(),
-        name: 'CareerCraft AI',
+        name: 'Project Atlas',
         url: '',
         summary: 'Full‑stack app to craft job‑tailored, ATS‑friendly resumes with live preview.',
         highlights: [

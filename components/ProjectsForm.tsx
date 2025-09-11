@@ -54,14 +54,13 @@ function Text({ label, value, onChange }: { label: string; value: string; onChan
 
 function NameSuggestions({ onPick, context }: { onPick: (v: string) => void; context: string[] }) {
   const base = [
-    'CareerCraft AI',
-    'ATS Wizard',
-    'HireHero',
-    'RoleReady Pro',
+    'Project Atlas',
+    'Insight Dash',
     'SkillForge',
     'StackScout',
     'Portfolio Pilot',
-    'MatchMaker Resume',
+    'HireHero',
+    'RoleReady Pro',
   ]
   const extras = (context || [])
     .map((c) => c.toLowerCase())

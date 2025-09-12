@@ -11,6 +11,16 @@ export default function InstructionsForm() {
 
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="md:col-span-3">
+        <Box title="Instruction Prompt (free text)">
+          <textarea
+            className="input h-24"
+            placeholder="Tell the wizard what to emphasize (e.g., emphasize backend, highlight leadership, keep to one page)."
+            value={instructions.prompt || ''}
+            onChange={(e) => setInstructions({ prompt: e.target.value })}
+          />
+        </Box>
+      </div>
       <Box title="Goals (e.g., Pass ATS, Senior role, Emphasize backend)">
         <TagEditor
           tags={instructions.goals}
@@ -54,7 +64,7 @@ function Box({ title, children }: { title: string; children: React.ReactNode }) 
 
 function TagEditor({ id, tags, onAdd, onRemove, input, setInput }: { id?: string; tags: string[]; onAdd: (v: string) => void; onRemove: (v: string) => void; input: string; setInput: (v: string) => void }) {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <div className="flex flex-wrap gap-2">
         {tags.map((t) => (
           <span key={t} className="inline-flex items-center gap-1 rounded bg-gray-100 px-2 py-1 text-xs">
@@ -63,11 +73,11 @@ function TagEditor({ id, tags, onAdd, onRemove, input, setInput }: { id?: string
           </span>
         ))}
       </div>
-      <div className="mt-2 flex gap-2">
-        <input id={id} className="input min-w-0 flex-1" value={input} placeholder="Type and press Enter" onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => {
+      <div className="flex items-center gap-2">
+        <input id={id} className="input min-w-0 h-10 flex-1" value={input} placeholder="Type and press Enter" onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => {
           if (e.key === 'Enter' && input.trim()) { e.preventDefault(); onAdd(input.trim()); setInput('') }
         }} />
-        <button className="btn" onClick={() => { if (input.trim()) { onAdd(input.trim()); setInput('') } }}>Add</button>
+        <button className="btn h-10" onClick={() => { if (input.trim()) { onAdd(input.trim()); setInput('') } }}>Add</button>
       </div>
     </div>
   )

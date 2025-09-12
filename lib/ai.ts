@@ -38,23 +38,16 @@ export async function generateResumeDraft(data: ResumeData): Promise<GeneratedRe
     } catch {}
   }
 
+  const jdSet = new Set(jdTokens)
+
   let experience = (data.experience.length ? data.experience : parsedExp).map((e) => ({
     ...e,
-    achievements: e.achievements
-      .map((a: string) => (a.trim().length ? a : ''))
-      .filter(Boolean)
-      .map((a: string) =>
-        a +
-        (Array.from(cue as Set<string>).some((k: string) => a.toLowerCase().includes(k))
-          ? ' — aligned with role requirements'
-          : '')
-      )
-      .map(enrich),
+    achievements: normalizeBullets(e.achievements, jdSet).map(enrich),
   }))
 
   let projects = (data.projects.length ? data.projects : parsedProj).map((p) => ({
     ...p,
-    highlights: p.highlights.map(enrich),
+    highlights: normalizeBullets(p.highlights.length ? p.highlights : [p.summary], jdSet).map(enrich),
   }))
 
   // Do not auto-synthesize sections; only use user/parsed content
@@ -89,4 +82,45 @@ function estimateYears(data: ResumeData): number {
   const earliest = Math.min(...starts)
   const years = (Date.now() - earliest) / (1000 * 60 * 60 * 24 * 365)
   return Math.max(0, Math.round(years))
+}
+
+function normalizeBullets(raw: string[], jd: Set<string>): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  const stop = new Set(['and', 'or', 'the', 'with', 'for', 'to'])
+  const pick = (line: string) => {
+    // split on common separators
+    let parts = line.split(/[•\u2022\-–—;]|\.\s+/).map((s) => s.trim()).filter(Boolean)
+    if (!parts.length) parts = [line]
+    // choose fragment with most JD overlap
+    let best = parts[0]
+    let bestScore = -1
+    for (const p of parts) {
+      const tokens = p.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean)
+      const score = tokens.reduce((acc, t) => acc + (jd.has(t) ? 1 : 0), 0)
+      if (score > bestScore) { best = p; bestScore = score }
+    }
+    // cleanup
+    let s = best
+      .replace(/https?:[^\s)]+/g, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim()
+    // limit to ~18 words
+    const words = s.split(/\s+/)
+    if (words.length > 18) s = words.slice(0, 18).join(' ')
+    // capitalize and end with period
+    s = s.charAt(0).toUpperCase() + s.slice(1)
+    if (!/[.!?]$/.test(s)) s += '.'
+    return s
+  }
+
+  for (const r of raw) {
+    const s = pick(r)
+    if (s && !seen.has(s.toLowerCase())) {
+      seen.add(s.toLowerCase())
+      out.push(s)
+    }
+    if (out.length >= 5) break
+  }
+  return out
 }

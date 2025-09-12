@@ -34,7 +34,7 @@ const initialState: State = {
   experience: [],
   projects: [],
   attachments: {},
-  instructions: { goals: [], keywords: [], constraints: [] },
+  instructions: { goals: [], keywords: [], constraints: [], prompt: '' },
   template: 'modern',
   style: { font: 'sans', accent: '#2563eb' },
 }

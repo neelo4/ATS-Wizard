@@ -44,6 +44,7 @@ export interface Instructions {
   goals: string[]
   keywords?: string[]
   constraints?: string[]
+  prompt?: string
 }
 
 export interface ResumeData {

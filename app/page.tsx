@@ -25,12 +25,12 @@ export default function HomePage() {
     <main className="container py-8">
       <AuthGate />
       <TourController />
-      <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex-1 min-w-0">
+      <header className="mb-6 space-y-3">
+        <div>
           <h1 className="text-2xl font-bold">JobFit Wizard</h1>
           <Marquee text="Attach your details, upload JD/resume, and generate a tailored resume." />
         </div>
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar max-w-full">
+        <div className="flex flex-wrap items-center gap-2 overflow-x-auto no-scrollbar">
           <TemplatePicker />
           <StylePicker />
           <ThemeToggle />

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react'
 import Modal from '@/components/ui/Modal'
-import { useAuth } from '@/lib/auth'
+import { useAuth, loadUser } from '@/lib/auth'
 import { useResumeStore, snapshot } from '@/lib/store'
 import { loadResume, saveResume } from '@/lib/persistence'
 
@@ -12,8 +12,16 @@ export default function AuthGate() {
   const seedExample = useResumeStore((s) => s.seedExample)
 
   useEffect(() => {
-    if (!user) setOpen(true)
-    else setOpen(false)
+    // Hydrate user from localStorage silently to avoid hydration mismatch
+    if (!user) {
+      const saved = loadUser()
+      if (saved) {
+        // silent sign-in
+        useAuth.getState().signIn(saved)
+        return
+      }
+    }
+    setOpen(!user)
   }, [user])
 
   // Auto-persist when signed in

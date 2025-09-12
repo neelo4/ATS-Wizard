@@ -8,6 +8,7 @@ import { loadResume, saveResume, hasResume } from '@/lib/persistence'
 export default function AuthButton() {
   const { user, signIn, signOut } = useAuth()
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const setBasics = useResumeStore((s) => s.setBasics)
   const seedExample = useResumeStore((s) => s.seedExample)
   const setAllFromSnapshot = (data: ReturnType<typeof snapshot>) => {
@@ -23,6 +24,7 @@ export default function AuthButton() {
 
   // Persist resume data on changes when logged in
   useEffect(() => {
+    setMounted(true)
     if (!user) return
     const unsub = useResumeStore.subscribe(() => {
       try { saveResume(user.id, snapshot()) } catch {}
@@ -47,7 +49,7 @@ export default function AuthButton() {
       <Modal open={open} title="Sign in" onClose={() => setOpen(false)}>
         <SignInForm onSubmit={(n, e) => { handleSignIn(n, e); setOpen(false) }} />
       </Modal>
-      {user ? (
+      {!mounted ? null : user ? (
         <div className="segmented" title={user.email}>
           <span className="px-3 py-1.5 text-sm">Hi, {user.name.split(' ')[0] || 'User'}</span>
           <button onClick={() => signOut()}>Sign out</button>

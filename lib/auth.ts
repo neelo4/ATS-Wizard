@@ -8,14 +8,14 @@ type AuthState = {
   signOut: () => void
 }
 
-const KEY = 'auth:user'
+export const KEY = 'auth:user'
 export const useAuth = create<AuthState>((set) => ({
-  user: typeof window !== 'undefined' ? loadUser() : null,
+  user: null,
   signIn: (user) => { try { localStorage.setItem(KEY, JSON.stringify(user)) } catch {} set({ user }) },
   signOut: () => { try { localStorage.removeItem(KEY) } catch {} set({ user: null }) },
 }))
 
-function loadUser(): User | null {
+export function loadUser(): User | null {
   try {
     const raw = localStorage.getItem(KEY)
     return raw ? (JSON.parse(raw) as User) : null

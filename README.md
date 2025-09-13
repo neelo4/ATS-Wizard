@@ -29,7 +29,8 @@ Craft job‑fit, ATS‑friendly resumes in minutes. Upload your existing resume 
 
 > Add a short screen capture (GIF) for maximum impact. Suggested path: `docs/demo.gif`.
 
-```
+```<img width="1377" height="706" alt="Screenshot 2025-09-13 at 09 23 40" src="https://github.com/user-attachments/assets/0f8569cc-02fc-48c5-86f0-bad5ef8b8e36" />
+
 docs/
   demo.gif   # drag a 5–8s demo here (UI → Upload → Generate → Download)
 ```

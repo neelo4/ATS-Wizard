@@ -32,20 +32,20 @@ export default function Modal({ open, title, children, onClose, overlayClassName
 
   if (!open) return null
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className={`absolute inset-0 ${overlayClassName || 'bg-black/30 backdrop-blur-sm'}`} onClick={onClose} />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className={`absolute inset-0 ${overlayClassName || 'bg-black/30 backdrop-blur-sm dark:bg-black/60'}`} onClick={onClose} />
       <div
-        className="relative w-full max-w-md rounded-lg bg-white shadow-lg dark:bg-gray-900"
+        className="relative w-[min(92vw,60rem)] max-w-5xl overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black/5 transition dark:bg-gray-900"
         style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
       >
         <div
-          className="flex cursor-move items-center justify-between rounded-t-lg bg-brand-600 px-4 py-3 text-white"
+          className="flex cursor-move items-center justify-between rounded-t-xl bg-brand-600 px-5 py-3 text-white dark:bg-brand-700"
           onMouseDown={(e) => { start.current = { x: pos.x, y: pos.y, mx: e.clientX, my: e.clientY }; setDragging(true) }}
         >
           <h2 className="text-sm font-semibold">{title}</h2>
           <button onClick={onClose} className="btn btn-ghost text-white">✕</button>
         </div>
-        <div className="p-5">
+        <div className="max-h-[75vh] overflow-y-auto p-6">
           {children}
         </div>
       </div>

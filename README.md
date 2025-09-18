@@ -107,6 +107,7 @@ SEO keywords: resume builder, resume generator, ATS resume, job description pars
 - Modern React (Next.js 14) + TypeScript + Tailwind CSS
 - Smart client-side parsers for PDF/DOCX uploads (pdfjs, mammoth)
 - Goals, keywords, constraints inputs to steer generation
+- Guided import wizard that lets you pick which resume sections (summary, experience, projects, education, skills) to keep
 - Two clean templates (Modern, Classic) with instant preview
 - Export via browser Print to PDF
 - Pluggable AI: local heuristic by default, bring-your-own LLM later
@@ -135,25 +136,23 @@ SEO keywords: resume builder, resume generator, ATS resume, job description pars
 
 ### AI Integration
 
-Out of the box, `lib/ai.ts` implements a local heuristic that:
+- `lib/ai.ts` – lightweight client helper that posts resume data to `/api/generate`.
+- `app/api/generate/route.ts` – serverless endpoint that calls `lib/ai-server.ts`.
+- `lib/ai-server.ts` – OpenAI integration with a structured JSON schema response and graceful fallback to `lib/ai-local.ts` when the API is unavailable.
 
-- Extracts keywords from the JD and your experience/projects
-- Builds a concise summary and skills list
-- Marks bullets aligned with the role
-- Estimates a simple ATS match score
+To enable OpenAI in local development or production:
 
-You can later swap in a real LLM by updating `generateResumeDraft` to call your provider (OpenAI, Azure OpenAI, Anthropic, etc.). Recommended approach:
+1. Create a `.env.local` (or configure environment variables in your deployment) with:
 
-```ts
-// lib/ai.ts
-export async function generateResumeDraft(data: ResumeData): Promise<GeneratedResume> {
-  const prompt = buildPrompt(data)
-  const resp = await fetch('https://api.openai.com/v1/chat/completions', { /* ... */ })
-  // parse -> GeneratedResume
-}
-```
+   ```env
+   OPENAI_API_KEY=sk-your-key
+   # Optional: override default model (gpt-4o-mini)
+   # OPENAI_MODEL=gpt-4o-mini
+   ```
 
-Keep the output schema the same to avoid touching the UI.
+2. Restart the dev server so the key is picked up.
+
+When the key is missing or a request fails, the app transparently falls back to the heuristic generator in `lib/ai-local.ts` so the "Generate with AI" button still produces a draft.
 
 ### File Parsing
 

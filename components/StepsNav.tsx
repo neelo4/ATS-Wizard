@@ -1,20 +1,23 @@
 "use client"
 import { User2, BriefcaseBusiness, Boxes, Upload, Wand2, Eye } from 'lucide-react'
+import type { WizardStep } from '@/lib/types'
 
-const steps = [
+const steps: Array<{ key: WizardStep; label: string; icon: any }> = [
+  { key: 'uploads', label: 'Uploads', icon: Upload },
   { key: 'details', label: 'Basics', icon: User2 },
+  { key: 'education', label: 'Education', icon: BriefcaseBusiness },
   { key: 'experience', label: 'Experience', icon: BriefcaseBusiness },
   { key: 'projects', label: 'Projects', icon: Boxes },
-  { key: 'uploads', label: 'Uploads', icon: Upload },
   { key: 'instructions', label: 'Instructions', icon: Wand2 },
   { key: 'preview', label: 'Preview', icon: Eye },
-] as const
+]
 
-export type StepKey = typeof steps[number]['key']
+export type StepKey = WizardStep
 
 export function StepsNav({ step, onChange }: { step: StepKey; onChange: (s: StepKey) => void }) {
   const palette: Record<StepKey, { base: string; active: string; dark: string }> = {
     details: { base: 'bg-blue-100 border-blue-300 text-blue-900', active: 'bg-blue-200 border-blue-400 text-blue-900', dark: 'dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-200' },
+    education: { base: 'bg-cyan-100 border-cyan-300 text-cyan-900', active: 'bg-cyan-200 border-cyan-400 text-cyan-900', dark: 'dark:bg-cyan-900/30 dark:border-cyan-800 dark:text-cyan-200' },
     experience: { base: 'bg-emerald-100 border-emerald-300 text-emerald-900', active: 'bg-emerald-200 border-emerald-400 text-emerald-900', dark: 'dark:bg-emerald-900/30 dark:border-emerald-800 dark:text-emerald-200' },
     projects: { base: 'bg-amber-100 border-amber-300 text-amber-900', active: 'bg-amber-200 border-amber-400 text-amber-900', dark: 'dark:bg-amber-900/30 dark:border-amber-800 dark:text-amber-200' },
     uploads: { base: 'bg-purple-100 border-purple-300 text-purple-900', active: 'bg-purple-200 border-purple-400 text-purple-900', dark: 'dark:bg-purple-900/30 dark:border-purple-800 dark:text-purple-200' },
